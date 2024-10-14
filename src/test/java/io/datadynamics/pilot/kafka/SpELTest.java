@@ -30,12 +30,12 @@ public class SpELTest {
 
         // 메시지의 `id` 값 추출, spel로 필터링
         filteringMessages(context, entity);
-
     }
 
     private void filteringMessages(StandardEvaluationContext context, Map entity) {
-        String spelExpression = "datalakeName == 'test' and id == 'test'";
-        Expression expression = expressionParser.parseExpression(spelExpression);
+        String defaultExpression = "filesize > 0 ";
+        String spelExpression = "and datalakeName == 'test' and id == 'test'";
+        Expression expression = expressionParser.parseExpression(defaultExpression + spelExpression);
 
         context.addPropertyAccessor(new MapAccessor());
 
@@ -55,5 +55,4 @@ public class SpELTest {
         IOUtils.closeQuietly(is);
         return json;
     }
-
 }
